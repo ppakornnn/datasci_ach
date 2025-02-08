@@ -1,0 +1,17 @@
+services:
+  db:
+    image: mariadb:latest
+    container_name: ex-app-db
+    volumes:
+      - ./data/mysql:/var/lib/mysql
+    restart: always
+    environment:
+      - MARIADB_ROOT_PASSWORD=exroot
+  adminer:
+    links:
+      - db
+    image: adminer
+    container_name: ex-app-adminer
+    restart: always
+    ports:
+      - 8000:8080
